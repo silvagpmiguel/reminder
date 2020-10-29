@@ -1,0 +1,21 @@
+#! /usr/bin/awk -f 
+
+BEGIN{
+    FS="«";
+}
+
+{
+    if ($6 == "Low" || $6 == "low")
+        prio="<span color=\"lightgreen\">Low</span>";
+    else if ($6 == "Normal" || $6 == "normal")
+        prio="<span color=\"khaki\">Normal</span>";
+    else if ($6 == "High" || $6 == "high")
+        prio="<span color=\"tomato\">High</span>";
+    else if ($6 == "Feedback" || $6 == "feedback")
+        prio="<span color=\"deepskyblue\">Feedback</span>";
+    else
+        prio="<span color=\"khaki\">Normal</span>";
+
+    printf "%s\n<span color=\"khaki\">%s</span>\n%s\n<span color=\"deepskyblue\">%s</span>\n<span color=\"orange\">%s</span>\n%s\n",
+    $1, $2, $3, $4, $5, prio;
+}

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+source ~/bin/reminder/reminder.properties
+
+deleteReminder() {
+    for line in $1; do
+        sed -i "/^$line./d" $REMINDERS_PATH;
+    done
+}
+
+createNewReminder() {
+    local rep="$REPO_INITIAL_PATH/$4"
+    if [ -s $REMINDERS_PATH ]; then
+        local id=`tail -1 $REMINDERS_PATH | grep -Eoh "^[0-9]*"`;
+        echo -e "$((id+1))«$2«$1«$3«$rep«$5" >> $REMINDERS_PATH;       
+    else
+        echo -e "1«$2«$1«$3«$rep«$5" >> $REMINDERS_PATH;
+    fi
+}
+
+listReminders() {
+    if [ -s $1 ]; then 
+        rremind;
+    else
+        echo -e "\e[35mCurrently, you have 0 reminders!\e[0m";
+    fi
+}
+
+case "$1" in
+    [a-zA-Z]*)
+        createNewReminder "$1" "$2" "$3" "$4" "$5";
+        ;;
+    "-del")
+        if [ ! -z "$2" ]; then
+            deleteReminder "$2"
+        else
+        echo 'Error, no arguments found. Showing Usage:';
+        echo 'Create reminder: reminder "description" task_id preview_url repository "priority:low|normal|high|feedback"';
+        echo 'Remove reminder(s): reminder -del "reminder_id1 reminder_id2"';
+        echo 'List reminders: reminder -list | rreminder';
+        exit;
+        fi
+        ;;
+    "-list")
+        listReminders $REMINDERS_PATH;
+        ;;
+    *)
+        echo 'Error, no arguments found. Showing Usage:';
+        echo 'Create reminder: reminder "description" task_id preview_url repository "priority:low|normal|high|feedback"';
+        echo 'Remove reminder(s): reminder -del "reminder_id1 reminder_id2"';
+        echo 'List reminders: reminder -list | rreminder';
+        exit;
+        ;;
+esac

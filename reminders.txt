@@ -1,0 +1,5 @@
+1«95829«Lacaixa: Formulários«http://neo8dev/vgn-ext-templating/v/index.jsp?vgnextoid=be22410c4ea21710VgnVCM1000008c44a8c0RCRD«~/Gitlab/neo8/«feedback
+2«96885«Lacaixa: Bug«https://neocorppre.dacfi.es/vgn-ext-templating/v/index.jsp?vgnextoid=1eb8df85afc1b610VgnVCM1000001638f70aRCRD#«~/Gitlab/neo8/«feedback
+3«27«Engineering: Licenses«http://license.test«~/Gitlab/license-generator«low
+4«0«Lacaixa: PWA«https://www.caixabank.es/particular/caixabank-seniors/programa-caixabank-seniors.html«~/Gitlab/«high
+5«97190«Lacaixa: Bug busquedas«https://neocorp.dacfi.es/neo-wem-extensions-web/neo/secure/search/searchKeywordInProd.jsp«~/Gitlab/neo8«normal
