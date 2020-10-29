@@ -6,7 +6,7 @@
 - Run install script: `sh install.sh`
 
 ## Run
-- Use **reminder** command to add/remove reminders  
-- Use **rreminder** command to watch active reminders
+- Use **remind** command to add/remove reminders  
+- Use **rremind** command to watch active reminders
 
 **Notes:** Reminder is only working for Linux distributions
