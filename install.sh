@@ -46,7 +46,7 @@ sudo cp -r $FROM_ICONS_FOLDER $TO_ICONS_FOLDER
 echo "## Configuring Bashrc & Setting Symbolic Links"
 echo "Adding Non-network local connections to access control list...";
 printf "\nxhost local:$USER > /dev/null\n" >> ~/.bashrc;
-echo "Adding symbolic links for reminder and rreminder...";
+echo "Adding symbolic links for remind and rremind...";
 ln -s $INSTALL_FOLDER/remind $BIN_FOLDER/remind
 ln -s $INSTALL_FOLDER/rremind $BIN_FOLDER/rremind
 echo "Refreshing bashrc..."
