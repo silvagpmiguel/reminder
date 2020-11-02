@@ -3,36 +3,36 @@
 source ~/bin/reminder/reminder.properties
 
 if [ -s $REMINDERS_PATH ]; then 
-    IFS=$'\n';
+    IFS=$'\n'
     ITEMS=( $( $AWK_REMINDER $REMINDERS_PATH) )
     RESP=( $(GTK_THEME="Yaru-colors/Yaru-Grey-dark" yad --list --width="1850" --height="750" --title="Reminders" \
     --button='<span color="orange">Exit</span>:1' --button='<span color="khaki">Show Task</span>:0' \
     --button='<span color="deepskyblue">Show Preview</span>:2' --button='<span color="tomato">Delete Reminder</span>:4' \
     --display=":0.0" --multiple --separator="::" --print-column="0" \
     --column="ID" --column="Task ID" --column="Description"  --column="Preview URL" --column="Repository" --column="Priority" \
-    ${ITEMS[@]}) );
-    CODE=$?;
-    unset IFS;
+    ${ITEMS[@]}) )
+    CODE=$?
+    unset IFS
     export DISPLAY=:0
     case $CODE in
         0)
             data=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: " ; FS = "::" } {print $2"::"$3"::"$5}'`
             IFS=$'\n'
             for each in $data; do
-                task=`echo $each | awk -F "::" '{print $1}' | grep -Eo '[0-9]*'`;
+                task=`echo $each | awk -F "::" '{print $1}' | grep -Eo '[0-9]*'`
                 desc=`echo $each | awk -F "::" '{print $2}'`;
                 if [[ $desc == *"Lacaixa"* || $desc == *"Caixabank"* ]]; then
                     $GCHROME $ATHENA/$task &> /dev/null &
                 else
-                    local_project=`echo $each | awk 'BEGIN{ FS = "::" } {print $3}' | grep -Eo '~[^<]**'`;
+                    local_project=`echo $each | awk 'BEGIN{ FS = "::" } {print $3}' | grep -Eo '~[^<]**'`
                     project="${local_project:9}";
                     $GCHROME $ENGINEERING/$project/$project/issues/$task &> /dev/null &
                 fi
             done
-            unset IFS;
+            unset IFS
             ;;
         2)
-            prev=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: "; FS = "::" } {print $4}' | grep -Eo '(www|http|https).*(\.[a-z]{2,4}[^<]*)'`;
+            prev=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: "; FS = "::" } {print $4}' | grep -Eo '(www|http|https).*(\.[a-z]{2,4}[^<]*)'`
             for each in $prev; do
                 $GCHROME $each &> /dev/null &
             done
@@ -40,11 +40,11 @@ if [ -s $REMINDERS_PATH ]; then
         4)
             data=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: " ; FS = "::" } {print $1}'`
             for del_id in $aux; do
-                $REMINDER -del $del_id;
+                $REMINDER -del $del_id
             done
             ;;
         *)
-            exit;
+            exit
             ;;
     esac
 fi
