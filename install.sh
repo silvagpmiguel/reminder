@@ -20,7 +20,7 @@ fi
 
 set -e
 
-echo "## Setting up Reminder Environment"
+echo "## Setting up Reminder Environment -> ~/bin/reminder"
 mkdir -p $INSTALL_FOLDER
 echo "Moving files to /reminder..."
 mv -n remind $INSTALL_FOLDER/
