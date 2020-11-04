@@ -1,6 +1,7 @@
 # Reminder
 
 ## Install
+- Download reminder
 - Open terminal and `cd` to reminder location
 - Run **install** script: `sh install.sh`
 
