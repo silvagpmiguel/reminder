@@ -1,9 +1,12 @@
 # Reminder
 
 ## Install
-- Extract reminder.zip
-- Open terminal and cd to the location of the zip
+- Download reminder
+- Open terminal and `cd` to reminder location
 - Run install script: `sh install.sh`
+
+## Uninstall
+- Run uninstall script: `sh uninstall.sh`
 
 ## Run
 - Use **remind** command to add/remove reminders  
