@@ -24,14 +24,14 @@ if [ -s $REMINDERS_PATH ]; then
             unset IFS
             ;;
         2)
-            prev=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: "; FS = "::" } {print $4}' | grep -Eo '(www|http|https).*(\.[a-z]{2,4}[^<]*)'`
-            for each in $prev; do
+            data=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: "; FS = "::" } {print $4}' | grep -Eo '(www|http|https).*(\.[a-z]{2,4}[^<]*)'`
+            for each in $data; do
                 $GCHROME $each &> /dev/null &
             done
             ;;
         4)
             data=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: " ; FS = "::" } {print $1}'`
-            for del_id in $aux; do
+            for del_id in $data; do
                 $REMINDER -del $del_id
             done
             ;;
