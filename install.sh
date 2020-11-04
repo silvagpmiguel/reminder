@@ -6,6 +6,7 @@ TO_THEMES_FOLDER=/usr/share/themes/Yaru-colors/
 FROM_ICONS_FOLDER=$INSTALL_FOLDER/themes/icons/Yaru-Grey
 TO_ICONS_FOLDER=/usr/share/icons/Yaru-colors/
 BIN_FOLDER=~/bin
+USR=`[ "root" = $USER ] && echo $SUDO_USER || echo $USER`
 
 echo "# Beginning Reminder Installation!"
 echo "## Verifying Yad Installation"
@@ -33,7 +34,8 @@ mv -n themes $INSTALL_FOLDER/
 touch $INSTALL_FOLDER/reminders.txt
 echo "Moving to install folder..."
 cd $INSTALL_FOLDER
-echo "Setting needed executable permissions..."
+echo "Setting executable permissions..."
+chown -R $USR:$USR remind awk-reminder uninstall.sh README.md reminder.properties rremind themes reminders.txt
 chmod +x remind awk-reminder rremind
 
 echo "## Installing Reminder Default Theme"
