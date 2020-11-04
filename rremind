@@ -18,15 +18,8 @@ if [ -s $REMINDERS_PATH ]; then
             data=`echo ${RESP[@]} | awk 'BEGIN{ RS = ":: " ; FS = "::" } {print $2"::"$3"::"$5}'`
             IFS=$'\n'
             for each in $data; do
-                task=`echo $each | awk -F "::" '{print $1}' | grep -Eo '[0-9]*'`
-                desc=`echo $each | awk -F "::" '{print $2}'`
-                if [[ $desc == *"Lacaixa"* || $desc == *"Caixabank"* ]]; then
-                    $GCHROME $ATHENA/$task &> /dev/null &
-                else
-                    local_project=`echo $each | awk 'BEGIN{ FS = "::" } {print $3}' | grep -Eo '~[^<]**'`
-                    project="${local_project:9}"
-                    $GCHROME $ENGINEERING/$project/$project/issues/$task &> /dev/null &
-                fi
+                task=`echo $each | awk -F "::" '{print $1}' | grep -Eo '(www|http|https).*(\.[a-z]{2,4}[^<]*)'`
+                $GCHROME $task &> /dev/null &
             done
             unset IFS
             ;;
